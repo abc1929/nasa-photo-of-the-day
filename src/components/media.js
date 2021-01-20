@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
 export default function Media(props) {
-   const { hdurl, media_type, url } = props;
+   const { media_type, url } = props;
    if (media_type === "video") {
       return (
          <div>
@@ -12,7 +11,7 @@ export default function Media(props) {
    }
    return (
       <div>
-         <img src={url} alt="Photo of the day" width="70%" />
+         <img src={url} alt="NASA stuff of the day" width="70%" />
       </div>
    );
 }
