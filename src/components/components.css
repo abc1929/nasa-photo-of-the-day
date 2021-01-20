@@ -1,0 +1,11 @@
+.card {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   width: 60%;
+}
+
+.mediabox {
+   width: 75%;
+}
