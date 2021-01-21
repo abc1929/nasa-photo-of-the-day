@@ -3,12 +3,41 @@ import axios from "axios";
 import Card from "./components/card.js";
 import Navbar from "./components/navbar.js";
 import { APIKEY } from "./private/apikey";
+// need a apikey to test the project
 import dayjs from "dayjs";
-
+import styled from "styled-components";
+// import { keyframes } from "styled-components";
 import "./App.css";
 
 var customParseFormat = require("dayjs/plugin/customParseFormat");
 dayjs.extend(customParseFormat);
+
+// const kf = keyframes`
+// 100% {
+//   opacity: 1;
+//   transform: scale(1);
+// }`;
+
+const MainDiv = styled.div`
+   text-align: center;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: center;
+   font-family: "roboto";
+`;
+
+const Logo = styled.span`
+   display: inline-block;
+   margin-right: 30px;
+   background: url(${process.env.PUBLIC_URL + "/NASA_Worm_logo.svg"}) 50% 50%
+      no-repeat;
+   background-size: 100% 100%;
+   width: 2em;
+   transform: scale(1.8);
+
+   text-indent: -9999px;
+`;
 
 export default function App() {
    const [details, setDetails] = useState([]);
@@ -79,16 +108,38 @@ export default function App() {
    if (!details) return <h3>Loading...</h3>;
    //  debugger;
    return (
-      <div className="App">
+      <MainDiv
+         onLoad={(e) => {
+            // this pulls the card component
+            const card = e.currentTarget.children[2];
+            card.animate(
+               [
+                  // keyframes
+                  { opacity: 0 },
+                  { opacity: 0.5 },
+                  { opacity: 1 },
+               ],
+               {
+                  // timing options
+                  duration: 200,
+                  iterations: 1,
+               }
+            );
+            card.style.opacity = 1;
+         }}
+      >
          {/* {console.log(date)} */}
-         <h1> NASA Photo of the Day </h1>
+         <h1>
+            {" "}
+            <Logo>NASA</Logo> Photo of the Day{" "}
+         </h1>
          <Navbar
             currentdate={currentdate}
             date={date}
             goforward={goforward}
             goback={goback}
-         />
-         <Card details={details} />
-      </div>
+         />{" "}
+         <Card details={details} />{" "}
+      </MainDiv>
    );
 }
